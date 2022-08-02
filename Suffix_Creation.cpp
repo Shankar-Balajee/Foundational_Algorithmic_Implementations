@@ -37,3 +37,10 @@ int main()
     cout << endl;
     return 0;
 }
+
+// basically the sort used in the program above is radix sort which makes the time complexity O(nlogn)
+//there is also a O(n) algorithm for the same problem
+
+// given a string we can find a substring in the given substring as every substring is a prefix of a suffix string of the given string
+// therefore the search can be done in Plogn where-p is the length of the substring
+// logn because of binnary search which can be done here because the suffix arrays are sorted .. 
