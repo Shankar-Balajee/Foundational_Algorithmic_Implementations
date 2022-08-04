@@ -40,3 +40,5 @@ int main() {
         cout << ans << endl;
     }
 }
+// the value of the function doesnt change when the multiplex automata doesn not  vary and hence 
+    

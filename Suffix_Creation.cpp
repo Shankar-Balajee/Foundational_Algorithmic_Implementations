@@ -8,7 +8,8 @@ using namespace std;
  
 int main()
 {
-    string s = "banana";
+    string s;
+    cin >>s;
     int n = s.length();
     map<string, int> Map;
     int suffix[n];
