@@ -41,46 +41,48 @@ double eps = 1e-12;
 
 /* ************************************************************************************************************************************* */
 /* CODE BEGINS HERE */
- 
 void swap(int *x,int *y)
 {
     int t=*x;
     *x=*y;
     *y=t;
 }
-int partition(int a[],int p,int r)
+void inplace_quick_sort(int s[],int a, int b)
 {
-    int x=a[r];
-    int i=p-1;
-    for(int j=p;j<=r-1;j++)
+    if(a>=b)
     {
-        if(a[j]<=x)
+        return;
+    }
+    int p=s[b];
+    int left_pointer=a;
+    int right_pointer=b-1;
+    while(left_pointer<=right_pointer)
+    {
+        while(s[left_pointer]<=p and right_pointer>=left_pointer)
         {
-            i++;
-            swap(&a[i],&a[j]);
+            left_pointer++;
+        }
+        while(s[right_pointer]>=p and right_pointer>=left_pointer)
+        {
+            right_pointer--;
+        }
+        if(left_pointer<right_pointer)
+        {
+            swap(&s[left_pointer],&s[right_pointer]);
         }
     }
-    swap(&a[i+1],&a[r]);
-    return i+1;
-}
-
-void quickSort(int a[],int p,int r)
-{
-    if(p<r)
-    {
-        int q=partition(a,p,r);
-        quickSort(a,p,q-1);
-        quickSort(a,q+1,r);
-    }
+    swap(&s[left_pointer],&s[b]);
+    inplace_quick_sort(s,a,left_pointer-1);
+    inplace_quick_sort(s,left_pointer,b);
 }
 signed main()
 {
    fast_cin();
-   int a[]={2,6,5,1,3,4};
-   int n=sizeof(a)/sizeof(a[0]);
-   quickSort(a,0,n-1);
-   forn(i,n)
+   int a[]={3,4,5,2,1};
+   inplace_quick_sort(a,0,4);
+   forn(i,5)
    {
-    cout << a[i]<< ' ';
+    cout << a[i] << ' ';
    }
+   return 0;
 }
