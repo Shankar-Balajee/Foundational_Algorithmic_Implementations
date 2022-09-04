@@ -9,7 +9,7 @@
 #include <fstream>
  
 using namespace std;
- 
+using namespace std::chrono;
 /* ************************************************************************************************************************************ */
 typedef long long ll;
 typedef long double ld;
@@ -62,7 +62,7 @@ void inplace_quick_sort(int s[],int a, int b)
         {
             left_pointer++;
         }
-        while(s[right_pointer]>=p and right_pointer>=left_pointer)
+        while(s[right_pointer]>p and right_pointer>=left_pointer)
         {
             right_pointer--;
         }
@@ -78,11 +78,16 @@ void inplace_quick_sort(int s[],int a, int b)
 signed main()
 {
    fast_cin();
-   int a[]={3,4,5,2,1};
-   inplace_quick_sort(a,0,4);
-   forn(i,5)
+   int t=1000000;
+   auto start = high_resolution_clock::now();
+   while(t--)
    {
-    cout << a[i] << ' ';
+    int a[]={1,1,1,1,1};
+    inplace_quick_sort(a,0,4);
    }
+   auto stop = high_resolution_clock::now();
+   auto duration = duration_cast<microseconds>(stop - start);
+   cout << "Time taken by function: "
+         << duration.count() << " microseconds" << endl;
    return 0;
 }

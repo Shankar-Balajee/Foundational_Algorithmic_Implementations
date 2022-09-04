@@ -36,51 +36,88 @@ double eps = 1e-12;
 #define fast_cin() ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL)
 #define all(x) (x).begin(), (x).end()
 #define sz(x) ((ll)(x).size())
+#define rep(i, n) for(ll i = 0, _n = (ll)(n); i < _n; i++)
 #define int long long
  
 
 /* ************************************************************************************************************************************* */
 /* CODE BEGINS HERE */
- 
-void swap(int *x,int *y)
-{
-    int t=*x;
-    *x=*y;
-    *y=t;
-}
-int partition(int a[],int p,int r)
-{
-    int x=a[r];
-    int i=p-1;
-    for(int j=p;j<=r-1;j++)
-    {
-        if(a[j]<=x)
-        {
-            i++;
-            swap(&a[i],&a[j]);
-        }
-    }
-    swap(&a[i+1],&a[r]);
-    return i+1;
-}
 
-void quickSort(int a[],int p,int r)
-{b)
-    if(p<r)
-    {
-        int q=partition(a,p,r);
-        quickSort(a,p,q-1);
-        quickSort(a,q+1,r);
-    }
-}
+#define N 10000;
+class ArDQ{
+    private:
+        
+    public:
+        int f=100;
+        int r=100;
+        int n=0;
+        int q[10000];
+        int size(){
+            return n;
+        }
+        void pushback(int a)
+        {
+            if(size()==10000)
+            {
+                cout << "full"<<endl;
+            }
+            else
+            {
+                q[r]=a;
+                r=(r+1)%N;
+                n++;
+            }
+        }
+        void popback()
+        {
+            if(n==0)
+            {
+                cout << "empty"<<endl;
+            }
+            else
+            {
+                r=(r-1)%N;
+                n--;
+            }
+        }
+        void pushfront(int a)
+        {
+            if(size()==10000)
+            {
+                cout << "full"<<endl;
+            }
+            else
+            {
+                f=(f-1)%N;
+                q[f]=a;
+                n++;
+            }
+        }
+        void popfront()
+        {
+            if(n==0)
+            {
+                cout << "empty"<<endl;
+            }
+            else
+            {
+                f=(f+1)%N;
+                n--;
+            }
+        }
+
+};
 signed main()
 {
    fast_cin();
-   int a[]={2,6,5,1,3,4};
-   int n=sizeof(a)/sizeof(a[0]);
-   quickSort(a,0,n-1);
-   forn(i,n)
+   ArDQ q;
+   q.pushback(100);
+   q.pushfront(50);
+   q.pushback(150);
+   q.pushfront(300);
+   q.popfront();
+   for(int i=q.f;i<q.r;i++)
    {
-    cout << a[i]<< ' ';
+        cout << q.q[i] << ' ';
    }
 }

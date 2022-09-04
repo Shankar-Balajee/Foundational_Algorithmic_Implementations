@@ -7,7 +7,7 @@
 #include <random>
 #include <iomanip>
 #include <fstream>
- 
+#include <set>
 using namespace std;
  
 /* ************************************************************************************************************************************ */
@@ -42,45 +42,22 @@ double eps = 1e-12;
 /* ************************************************************************************************************************************* */
 /* CODE BEGINS HERE */
  
-void swap(int *x,int *y)
+// SET
+// insert, find , erase, begin , end
+
+int32_t main()
 {
-    int t=*x;
-    *x=*y;
-    *y=t;
-}
-int partition(int a[],int p,int r)
-{
-    int x=a[r];
-    int i=p-1;
-    for(int j=p;j<=r-1;j++)
-    {
-        if(a[j]<=x)
-        {
-            i++;
-            swap(&a[i],&a[j]);
-        }
-    }
-    swap(&a[i+1],&a[r]);
-    return i+1;
+    set<int> a;
+    set <int> b;
+
+    // union
+    set<int> c;
+    c=a.union(b);
+    //intersection
+    c=a.intersect(b);
+    // minus
+    c=a.minus(b);
 }
 
-void quickSort(int a[],int p,int r)
-{b)
-    if(p<r)
-    {
-        int q=partition(a,p,r);
-        quickSort(a,p,q-1);
-        quickSort(a,q+1,r);
-    }
-}
-signed main()
-{
-   fast_cin();
-   int a[]={2,6,5,1,3,4};
-   int n=sizeof(a)/sizeof(a[0]);
-   quickSort(a,0,n-1);
-   forn(i,n)
-   {
-    cout << a[i]<< ' ';
-   }
-}
+// how do we implement  this
+

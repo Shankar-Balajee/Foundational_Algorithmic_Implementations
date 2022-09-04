@@ -7,7 +7,7 @@
 #include <random>
 #include <iomanip>
 #include <fstream>
- 
+#include <cstring>
 using namespace std;
  
 /* ************************************************************************************************************************************ */
@@ -42,45 +42,52 @@ double eps = 1e-12;
 /* ************************************************************************************************************************************* */
 /* CODE BEGINS HERE */
  
-void swap(int *x,int *y)
-{
-    int t=*x;
-    *x=*y;
-    *y=t;
-}
-int partition(int a[],int p,int r)
-{
-    int x=a[r];
-    int i=p-1;
-    for(int j=p;j<=r-1;j++)
-    {
-        if(a[j]<=x)
-        {
-            i++;
-            swap(&a[i],&a[j]);
-        }
-    }
-    swap(&a[i+1],&a[r]);
-    return i+1;
-}
-
-void quickSort(int a[],int p,int r)
-{b)
-    if(p<r)
-    {
-        int q=partition(a,p,r);
-        quickSort(a,p,q-1);
-        quickSort(a,q+1,r);
-    }
-}
 signed main()
 {
    fast_cin();
-   int a[]={2,6,5,1,3,4};
-   int n=sizeof(a)/sizeof(a[0]);
-   quickSort(a,0,n-1);
-   forn(i,n)
+   int n;
+   cin >>n;
+   int k;
+   cin >>k;
+   vector<string> v;
+   for(int i=0;i<n;i++)
    {
-    cout << a[i]<< ' ';
+    string s;
+    cin >>s;
+    v.pb(s);
+   }
+   for(int i=k;i>=1;i--)
+   {
+        vector<string> buckets[27];
+        
+        for(int j=0;j<n;j++)
+        {
+            string current_string=v[j];
+            
+            if(current_string.size()>=i)
+            {
+                buckets[v[j][i-1]-'a'].push_back(current_string);
+            }
+            else
+            {
+                buckets[26].pb(current_string);
+            }
+        }
+        v.clear();
+        for(auto y:buckets[26])
+        {
+            v.pb(y);
+        }
+        for(int bruh=0;bruh<26;bruh++)
+        {
+            for(auto hehe:buckets[bruh])
+            {
+                v.pb(hehe);
+            }
+        }
+   }
+   for(auto words:v)
+   {
+    cout << words << endl;
    }
 }

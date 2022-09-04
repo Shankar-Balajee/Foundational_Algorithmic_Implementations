@@ -36,51 +36,57 @@ double eps = 1e-12;
 #define fast_cin() ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL)
 #define all(x) (x).begin(), (x).end()
 #define sz(x) ((ll)(x).size())
+#define rep(i, n) for(ll i = 0, _n = (ll)(n); i < _n; i++)
 #define int long long
  
 
 /* ************************************************************************************************************************************* */
 /* CODE BEGINS HERE */
- 
-void swap(int *x,int *y)
-{
-    int t=*x;
-    *x=*y;
-    *y=t;
-}
-int partition(int a[],int p,int r)
-{
-    int x=a[r];
-    int i=p-1;
-    for(int j=p;j<=r-1;j++)
-    {
-        if(a[j]<=x)
-        {
-            i++;
-            swap(&a[i],&a[j]);
+#define N 10000;
+class ArQ{
+    private:
+        int f=100;
+        int r=100;
+        int n=0;
+        int q[10000];
+    public:
+        int size(){
+            return n;
         }
-    }
-    swap(&a[i+1],&a[r]);
-    return i+1;
-}
+        void enqueue(int a)
+        {
+            if(size()==10000)
+            {
+                cout << "full"<<endl;
+            }
+            else
+            {
+                q[f]=a;
+                r=(r+1)%N;
+                n++;
+            }
+        }
+        void dequeue()
+        {
+            if(n==0)
+            {
+                cout << "empty"<<endl;
+            }
+            else
+            {
+                f=(f+1)%N;
+                n--;
+            }
+        }
 
-void quickSort(int a[],int p,int r)
-{b)
-    if(p<r)
-    {
-        int q=partition(a,p,r);
-        quickSort(a,p,q-1);
-        quickSort(a,q+1,r);
-    }
-}
+};
 signed main()
 {
    fast_cin();
-   int a[]={2,6,5,1,3,4};
-   int n=sizeof(a)/sizeof(a[0]);
-   quickSort(a,0,n-1);
-   forn(i,n)
-   {
-    cout << a[i]<< ' ';
-   }
+   ArQ q;
+   q.enqueue(100);
+   q.enqueue(200);
+   q.enqueue(300);
+   q.dequeue();
+   cout << q.size() << endl;
 }

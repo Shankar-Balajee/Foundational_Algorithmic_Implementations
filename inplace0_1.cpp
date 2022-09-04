@@ -41,46 +41,30 @@ double eps = 1e-12;
 
 /* ************************************************************************************************************************************* */
 /* CODE BEGINS HERE */
- 
-void swap(int *x,int *y)
-{
-    int t=*x;
-    *x=*y;
-    *y=t;
-}
-int partition(int a[],int p,int r)
-{
-    int x=a[r];
-    int i=p-1;
-    for(int j=p;j<=r-1;j++)
-    {
-        if(a[j]<=x)
-        {
-            i++;
-            swap(&a[i],&a[j]);
-        }
-    }
-    swap(&a[i+1],&a[r]);
-    return i+1;
-}
 
-void quickSort(int a[],int p,int r)
-{b)
-    if(p<r)
-    {
-        int q=partition(a,p,r);
-        quickSort(a,p,q-1);
-        quickSort(a,q+1,r);
-    }
-}
 signed main()
 {
    fast_cin();
-   int a[]={2,6,5,1,3,4};
-   int n=sizeof(a)/sizeof(a[0]);
-   quickSort(a,0,n-1);
-   forn(i,n)
+   int a[]={0,1,0,1,1,0};
+   int n=6;
+   int l=0;
+   int r=n-1;
+   while(l<r)
    {
-    cout << a[i]<< ' ';
+        while(a[l]!=1 and r>l)
+        {
+            l++;
+        }
+        while(a[r]!=0 and r>l)
+        {
+            r--;
+        }
+        int t=a[l];
+        a[l]=a[r];
+        a[r]=t;
+   }
+   forn(i,6)
+   {
+    cout << a[i] << ' ';
    }
 }

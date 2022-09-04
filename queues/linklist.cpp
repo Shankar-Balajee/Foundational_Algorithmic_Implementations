@@ -36,51 +36,41 @@ double eps = 1e-12;
 #define fast_cin() ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL)
 #define all(x) (x).begin(), (x).end()
 #define sz(x) ((ll)(x).size())
+#define rep(i, n) for(ll i = 0, _n = (ll)(n); i < _n; i++)
 #define int long long
  
 
 /* ************************************************************************************************************************************* */
 /* CODE BEGINS HERE */
- 
-void swap(int *x,int *y)
-{
-    int t=*x;
-    *x=*y;
-    *y=t;
-}
-int partition(int a[],int p,int r)
-{
-    int x=a[r];
-    int i=p-1;
-    for(int j=p;j<=r-1;j++)
-    {
-        if(a[j]<=x)
-        {
-            i++;
-            swap(&a[i],&a[j]);
-        }
-    }
-    swap(&a[i+1],&a[r]);
-    return i+1;
-}
 
-void quickSort(int a[],int p,int r)
-{b)
-    if(p<r)
-    {
-        int q=partition(a,p,r);
-        quickSort(a,p,q-1);
-        quickSort(a,q+1,r);
-    }
-}
+struct node{
+    int num;
+    struct node* next;
+};
 signed main()
 {
    fast_cin();
-   int a[]={2,6,5,1,3,4};
-   int n=sizeof(a)/sizeof(a[0]);
-   quickSort(a,0,n-1);
-   forn(i,n)
+   int n;
+   cin >>n;
+   struct node* head;
+   head=(struct node *)(malloc(sizeof(struct node)));
+   struct node * b=head;
+   cin>>head->num;
+   head->next=NULL;
+   for(int i=1;i<n;i++)
    {
-    cout << a[i]<< ' ';
+        struct node* temp;
+        temp=(struct node *)(malloc(sizeof(struct node)));
+        int x;
+        cin >>x;
+        temp->num=x;
+        temp->next=NULL;
+        head->next=temp;
+        head=head->next;
+   }
+   while(b!=NULL)
+   {
+        cout << b->num<<' ';
+        b=b->next;
    }
 }

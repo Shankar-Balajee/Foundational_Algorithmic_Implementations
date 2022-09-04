@@ -41,46 +41,33 @@ double eps = 1e-12;
 
 /* ************************************************************************************************************************************* */
 /* CODE BEGINS HERE */
- 
-void swap(int *x,int *y)
-{
-    int t=*x;
-    *x=*y;
-    *y=t;
-}
-int partition(int a[],int p,int r)
-{
-    int x=a[r];
-    int i=p-1;
-    for(int j=p;j<=r-1;j++)
-    {
-        if(a[j]<=x)
-        {
-            i++;
-            swap(&a[i],&a[j]);
-        }
-    }
-    swap(&a[i+1],&a[r]);
-    return i+1;
-}
 
-void quickSort(int a[],int p,int r)
-{b)
-    if(p<r)
-    {
-        int q=partition(a,p,r);
-        quickSort(a,p,q-1);
-        quickSort(a,q+1,r);
-    }
-}
+// expected runtime of quickselect 
+// good  call , L and G have size < 3 n/4 
+// bad call ;atleast one of them have size >= 3n/4
+// 7 2 9 4 3 7 6 1
+// say 6 is the pivot, we have (2 4 3 1 ) and (7 9 7) good call
+// the elements in the middle half lead to the good call
+// P(good call pivot)=1/2 ..
+// so what if there are duplicates ..... 
+// a few facts from probability to prove this 
+/* the expected # of tosses until a head for a fair coin is 2(geometric random variable) 
+fact #2: expectation is a linear operator , i e , E(X+Y) = E(x)+E(y) 
+E(cX)=cE(X)
+*/
+// Tavg(N)= expected runtime of quickselect
+// Tavg(n)<= Tavg(3n/4)+ bn X(expected number of alls before a good call??) 
+// where  is bn coming from? the partition . 3n/4 comes from the recursive call 
+// <=Tvg(3n/4) + 2bn .. (now how exACTLY do we )
+// by masters method it is O(n) .. however ..
+
 signed main()
 {
    fast_cin();
-   int a[]={2,6,5,1,3,4};
-   int n=sizeof(a)/sizeof(a[0]);
-   quickSort(a,0,n-1);
-   forn(i,n)
+   int t;
+   cin >>t;
+   while(t--)
    {
-    cout << a[i]<< ' ';
+        
    }
 }
