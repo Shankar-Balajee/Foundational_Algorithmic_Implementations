@@ -42,40 +42,40 @@ double eps = 1e-12;
 
 /* ************************************************************************************************************************************* */
 /* CODE BEGINS HERE */
- 
+
 signed main()
 {
    fast_cin();
-   int t;
-   cin >>t;
-   while(t--)
-   {
-    deque<char> s;
-   int n;
-   cin>>n;
-   string ss;
-   cin >>ss;
-   int ans=0;
+   int n,m;
+   cin >>n>>m;
+   int a[n];
+   int b[n];
+   int diff[n];
+   int sum=0;
    forn(i,n)
    {
-    if(ss[i]=='(')
-    {
-        s.push_back(ss[i]);
-    }
-    else
-    {
-        if(s.empty())
-        {
-            continue;
-        }
-        else
-        {
-            int x=*(s.end()-1);
-            s.pop_back();
-            ans++;
-        }
-    }
+    cin >>a[i]>>b[i];
+    sum+=a[i];
+    diff[i]=a[i]-b[i];
    }
-   cout << ans<< endl;
+   int req=sum-m;
+   int c=0;
+   sort(diff,diff+n);
+   for(int i=n-1;i>=0;i--)
+   {
+        if(req<=0)
+        {
+            break;
+        }
+        req-=diff[i];
+        c++;
+   }
+   if(req>0)
+   {
+    cout << -1 << endl;
+   }
+   else
+   {
+    cout << c << endl;
    }
 }

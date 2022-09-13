@@ -50,32 +50,16 @@ signed main()
    cin >>t;
    while(t--)
    {
-    deque<char> s;
-   int n;
-   cin>>n;
-   string ss;
-   cin >>ss;
-   int ans=0;
-   forn(i,n)
-   {
-    if(ss[i]=='(')
-    {
-        s.push_back(ss[i]);
-    }
-    else
-    {
-        if(s.empty())
+        int n;
+        cin >>n;
+        int a[n];
+        rep(i,n)
         {
-            continue;
+            cin >>a[i];
         }
-        else
-        {
-            int x=*(s.end()-1);
-            s.pop_back();
-            ans++;
-        }
-    }
-   }
-   cout << ans<< endl;
+        int pos=n-1;
+        while(pos>0 and a[pos-1]>=a[pos])pos--;
+        while(pos>0 and a[pos-1]<=a[pos])pos--;
+        cout << pos << endl;
    }
 }

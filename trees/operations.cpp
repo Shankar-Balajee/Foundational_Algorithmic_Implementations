@@ -43,39 +43,4 @@ double eps = 1e-12;
 /* ************************************************************************************************************************************* */
 /* CODE BEGINS HERE */
  
-signed main()
-{
-   fast_cin();
-   int t;
-   cin >>t;
-   while(t--)
-   {
-    deque<char> s;
-   int n;
-   cin>>n;
-   string ss;
-   cin >>ss;
-   int ans=0;
-   forn(i,n)
-   {
-    if(ss[i]=='(')
-    {
-        s.push_back(ss[i]);
-    }
-    else
-    {
-        if(s.empty())
-        {
-            continue;
-        }
-        else
-        {
-            int x=*(s.end()-1);
-            s.pop_back();
-            ans++;
-        }
-    }
-   }
-   cout << ans<< endl;
-   }
-}
+struct node 

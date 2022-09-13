@@ -44,33 +44,113 @@ double eps = 1e-12;
 /* CODE BEGINS HERE */
 
 struct node{
-    int num;
-    struct node* next;
+     int val;
+     int p;
+     struct node* next;
 };
+void solve(struct node* head,struct node* start)
+{
+     
+}
 signed main()
 {
-   fast_cin();
    int n;
    cin >>n;
    struct node* head;
-   head=(struct node *)(malloc(sizeof(struct node)));
-   struct node * b=head;
-   cin>>head->num;
-   head->next=NULL;
-   for(int i=1;i<n;i++)
+   head=(struct node*)(malloc(sizeof(struct node)));
+   int arc=0;
+   int nc=0;
+   struct node* start=NULL;
+   while(n--)
    {
-        struct node* temp;
-        temp=(struct node *)(malloc(sizeof(struct node)));
-        int x;
-        cin >>x;
-        temp->num=x;
-        temp->next=NULL;
-        head->next=temp;
-        head=head->next;
-   }
-   while(b!=NULL)
-   {
-        cout << b->num<<' ';
-        b=b->next;
+          int t;
+          cin >>t;
+          
+          if(t==1)
+          {
+               if(arc==0)
+               {
+                    cin >>head->val;
+                    cin >>head->p;
+                    head->next=NULL;
+                    arc++;
+                    start=head;
+               }
+               else
+               {
+                    struct node* temp;
+                    temp=(struct node*)(malloc(sizeof(struct node)));
+                    cin >>temp->val;
+                    cin >>temp->p;
+                    temp->next=NULL;
+                    head->next=temp;
+                    head=head->next;
+                    arc++;
+                    head=start;
+               }
+               //we have reset to the starting point
+               
+          }
+          else if(t==2)
+          {
+               // we just remove the last element right? or the first element , its the first we gotta update start as well
+               if(start==NULL)
+               {
+                    cout << "No letter"<<endl;
+                    arc=0;
+                    nc++;
+                    continue;
+               }
+               struct node* ptr=start;
+               cout << start->val <<endl;
+               start=start->next;
+               head=start;
+               free(ptr);
+          }
+          else
+          {
+               // highest priority shall be removed and how exactly? we shall traverse to find the maximum value of p
+               if(start==NULL)
+               {
+                    cout << "No letter"<<endl;
+                    arc=0;
+                    nc++;
+                    continue;
+               }
+               struct node* pt=start;
+               struct node* maxptr=pt;
+               int maxprior=pt->p;
+               while(pt!=NULL)
+               {
+                    if(pt->p>maxprior)
+                    {
+                         maxptr=pt;
+                         maxprior=pt->p;
+                    }
+                    pt=pt->next;
+               }
+               // reset to start again uff
+               
+               // now we gotta remove maxptr from the thing
+               // if maxptr is the start
+               cout << maxptr->val << ' ' << maxptr->p << endl;
+               if(maxptr==start)
+               {
+                    start=start->next;
+                    free(maxptr);
+               }
+               else
+               {
+                    struct node* temp=start;
+                    while(temp->next!=maxptr)
+                    {
+                         temp=temp->next;
+                    }
+                    struct node* ptt=maxptr->next;
+                    temp->next=ptt;
+                    free(maxptr);
+               }
+               head=start;
+          }
    }
 }

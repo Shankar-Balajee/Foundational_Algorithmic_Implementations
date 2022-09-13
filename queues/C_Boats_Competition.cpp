@@ -50,32 +50,48 @@ signed main()
    cin >>t;
    while(t--)
    {
-    deque<char> s;
-   int n;
-   cin>>n;
-   string ss;
-   cin >>ss;
-   int ans=0;
-   forn(i,n)
-   {
-    if(ss[i]=='(')
-    {
-        s.push_back(ss[i]);
-    }
-    else
-    {
-        if(s.empty())
+        int n;
+        cin >>n;
+        int a[n];
+        map<int,int>m;
+        rep(i,n)
         {
-            continue;
+            cin >>a[i];
+            m[a[i]]++;
         }
-        else
+        sort(a,a+n);
+        int beg=2*a[0];
+        int end=2*a[n-1];
+        float maxpairs=-1000.00;
+        for(int s=beg;s<=end;s++)
         {
-            int x=*(s.end()-1);
-            s.pop_back();
-            ans++;
+            float pairs=0;
+            for(auto x:m)
+            {
+                int req=s-x.first;
+                if(req==x.first)
+                {
+                    if(x.second>=2)
+                    {
+                        pairs+=(x.second/(float)2);
+                    }
+                }else
+                {
+                    if(m.find(req)==m.end())
+                    {
+                        continue;
+                    }
+                    else
+                    {
+                        int c1=m[req];
+                        int c2=x.second;
+                        pairs+=(min(c1,c2)/(float)2);
+                    }
+                }
+            }
+            maxpairs=max(maxpairs,pairs);
         }
-    }
-   }
-   cout << ans<< endl;
+        cout << (int)(maxpairs)<<endl;
+        
    }
 }

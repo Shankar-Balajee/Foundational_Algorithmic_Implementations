@@ -46,36 +46,89 @@ double eps = 1e-12;
 signed main()
 {
    fast_cin();
-   int t;
-   cin >>t;
-   while(t--)
+   int n,m;
+   cin>>n>>m;
+   int a[n][m];
+   rep(i,n)
    {
-    deque<char> s;
-   int n;
-   cin>>n;
-   string ss;
-   cin >>ss;
-   int ans=0;
-   forn(i,n)
-   {
-    if(ss[i]=='(')
+    rep(j,m)
     {
-        s.push_back(ss[i]);
-    }
-    else
-    {
-        if(s.empty())
-        {
-            continue;
-        }
-        else
-        {
-            int x=*(s.end()-1);
-            s.pop_back();
-            ans++;
-        }
+        cin >>a[i][j];
     }
    }
-   cout << ans<< endl;
+   int b[n][m];
+   int c[n][m];
+   rforsn(i,n-2,1)
+   {
+        rforsn(j,m-2,1)
+        {
+            if(a[i][j]==0)
+            {
+                int v1=a[i][j+1]-1;
+                int v2=a[i+1][j]-1;
+                if(v2<v1+1 and v1<v2+1)
+                {
+                    a[i][j]=max(v1,v2);
+                }
+                else if(v2<v1+1 and v1>=v2+1)
+                {
+                    a[i][j]=v2;
+                }
+                else if(v1<v2+1 and v2>=v1+1)
+                {
+                    a[i][j]=v1;
+                }
+                else
+                {
+                    a[i][j]=min(v1,v2);
+                }
+            }
+        }
+   }
+   
+   bool p=1;
+   forn(i,n)
+   {
+    
+        forn(j,m-1)
+        {
+            if(a[i][j]<a[i][j+1])
+            {
+                continue;
+            }
+            else
+            {
+                p=0;
+            }
+        }
+   }
+   forn(j,m)
+   {
+        forn(i,n-1)
+        {
+            if(a[i][j]>=a[i+1][j])
+            {
+                p=0;
+            }
+        }
+   }
+   if(p)
+   {
+        int sum=0;
+        forn(i,n)
+        {
+            forn(j,m)
+            {
+                sum+=a[i][j];
+                //cout << a[i][j]<<' ';
+            }
+            //cout << endl;
+        }
+        //cout << endl;
+        cout << sum << endl;
+   }
+   else
+   {
+    cout << -1 << endl;
    }
 }
