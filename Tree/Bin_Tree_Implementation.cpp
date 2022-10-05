@@ -24,4 +24,5 @@ int main()
     struct node* ll;
     root->left-ll;
     Insert(ll,20);
+    
 }
